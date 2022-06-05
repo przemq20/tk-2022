@@ -11,4 +11,5 @@ node_modules
 *.bson
 .vscode
 __pycache__
-weather_server/env
+env/
+animal_server/model_weights.pth
