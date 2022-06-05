@@ -220,7 +220,6 @@ Testing the style node from the root directory:
 
     $ python -m pytest
 
-
 ### People node (C++):
 
     $ cd people_server
@@ -230,7 +229,7 @@ Build steps:
     $ mkdir build && cd build
     $ conan install ..
     $ cmake ..
-    $ cmake --build .
+    $ cmake --build . --config=Release
 
 To start server run executable named `peopleServer`
 
