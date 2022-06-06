@@ -12,4 +12,4 @@ export const ModuleRoutes = {
 	body: 'http://localhost:8090/',
 	style: 'http://localhost:8091/',
 	format: 'http://localhost:8094/',
-}
+};

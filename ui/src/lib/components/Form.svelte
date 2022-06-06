@@ -390,7 +390,7 @@
             />
             Body parts <i class="arrow {moduleUis['body'].arrowDirection}"/>
         </p>
-               {#if moduleUis['body'].visible && isBodyConfig(formConfigMap['body'])}
+        {#if moduleUis['body'].visible && isBodyConfig(formConfigMap['body'])}
             <div class="moduleForm one" transition:slide>
                 <label>
                     <input type=checkbox bind:checked={formConfigMap['body'].faceChecked}>
