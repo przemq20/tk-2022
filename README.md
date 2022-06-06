@@ -187,6 +187,96 @@ Testing the body node from the root directory:
     $ python -m pytest
 
 
+### Style node (Flask):
+
+    $ cd style_server
+
+Build steps:
+
+    $ python -m venv ./env
+
+    For Windows:
+
+    $ ./env/Scripts/Activate.ps1 (or .bat)
+
+    or for Linux/Mac:
+
+    $ ./env/Scripts/activate
+
+    Then:
+    $ python -m pip install -r requirements.txt
+
+In order to run the style module a `.skey` file containing a subscription key for the Azure Custom Vision service should be place inside the module.
+Running the style node from the root directory:
+
+    $ python -m ./style_server
+
+    or from the style_server directory:
+
+    $ python ./
+
+Testing the style node from the root directory:
+
+    $ cd .\style_server\
+
+    $ python -m pytest
+
+
+### Animal node (Flask):
+
+    $ cd animal_server
+
+Build steps:
+
+    $ python -m venv ./env
+
+    For Windows:
+
+    $ ./env/Scripts/Activate.ps1 (or .bat)
+
+    or for Linux/Mac:
+
+    $ ./env/Scripts/activate
+
+    Then:
+    $ python -m pip install -r requirements.txt
+
+In order to run the animal module a `model_weights.pth` file containing model weights should be place inside the module.
+It can be downloaded from [Google Drive](https://drive.google.com/drive/folders/1S9rfshXWraeZCb_LCE_cH0SpWYgntPxN).
+Running the animal node from the root directory:
+
+    $ python -m ./animal_server
+
+    or from the animal_server directory:
+
+    $ python ./
+
+Testing the animal node from the root directory:
+
+    $ cd .\animal_server\
+
+    $ python -m pytest
+
+
+### Format node (Flask):
+
+    $ cd format_server
+    
+Running the format node from the root directory:
+
+    $ python -m ./format_server
+
+    or from the format_server directory:
+
+    $ python ./
+
+Testing the format node from the root directory:
+
+    $ cd .\format_server\
+
+    $ python -m pytest
+
+
 ### People node (C++):
 
     $ cd people_server
@@ -243,22 +333,45 @@ Inside the lib directory, you can find the text_server module which contains the
 -   `text_server_router.ex` - defines the REST API interface,
 -   `ocr.ex` - this is where the text recognition logic resides.
 
-### Weather Module
+### Body Module
 
-The weather module is a Flask REST server that resides in the weather module directory. It contains the following:
+The body module is a Flask REST server that resides in the body module directory. It contains the following:
 
--   `/predict_weather_in_image` - directory, where the integrated model is defined,
 -   `/test` - directory, where test-related utils are defined,
 -   `check_json.py` - utility script for checking the validity of the JSON request,
 -   `create_app.py` - utility script for creating the Flask application,
--   `weather_module.py` - the main class responsible for the handling of the requests and running the model,
--   `__main__.py` - the main script for the weather module.
+-   `body_module.py` - the main class responsible for the handling of the requests and running the model,
+-   `__main__.py` - the main script for the body module.
 
-Inside the `predict_weather_in_image` directory, you can find the following files:
+### Style Module
 
--   `pwii.py` - the main model handler script,
--   `retrained_graph.pb` - the model graph,
--   `retrained_labels.txt` - the model labels,
+The style module is a Flask REST server that resides in the style module directory. It contains the following:
+
+-   `/test` - directory, where test-related utils are defined,
+-   `check_json.py` - utility script for checking the validity of the JSON request,
+-   `create_app.py` - utility script for creating the Flask application,
+-   `style_module.py` - the main class responsible for the handling of the requests and running the model,
+-   `__main__.py` - the main script for the style module.
+
+### Format Module
+
+The format module is a Flask REST server that resides in the format module directory. It contains the following:
+
+-   `/test` - directory, where test-related utils are defined,
+-   `check_json.py` - utility script for checking the validity of the JSON request,
+-   `create_app.py` - utility script for creating the Flask application,
+-   `format_module.py` - the main class responsible for the handling of the requests and running the model,
+-   `__main__.py` - the main script for the format module.
+
+### Animal Module
+
+The animal module is a Flask REST server that resides in the animal module directory. It contains the following:
+
+-   `/test` - directory, where test-related utils are defined,
+-   `check_json.py` - utility script for checking the validity of the JSON request,
+-   `create_app.py` - utility script for creating the Flask application,
+-   `animal_module.py` - the main class responsible for the handling of the requests and running the model,
+-   `__main__.py` - the main script for the animal module.
 
 ### People Module
 

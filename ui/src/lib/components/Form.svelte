@@ -64,7 +64,7 @@
 
     const handleRangeChange = (range: FormRange, property: keyof FormRange) => (e: Event) => {
         let input = e.target as HTMLInputElement;
-        input.value = range.clamp(property, parseFloat(input.value)).toString();
+        input.value = (range.clamp(property, parseFloat(input.value)) ?? '').toString();
     };
 
     const handleSubmit = () => {
@@ -390,7 +390,7 @@
             />
             Body parts <i class="arrow {moduleUis['body'].arrowDirection}"/>
         </p>
-               {#if moduleUis['body'].visible && isBodyConfig(formConfigMap['body'])}
+        {#if moduleUis['body'].visible && isBodyConfig(formConfigMap['body'])}
             <div class="moduleForm one" transition:slide>
                 <label>
                     <input type=checkbox bind:checked={formConfigMap['body'].faceChecked}>
