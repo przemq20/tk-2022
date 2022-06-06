@@ -1,3 +1,5 @@
+.skey
+
 .DS_Store
 node_modules
 /build
@@ -13,3 +15,6 @@ node_modules
 __pycache__
 weather_server/env
 format_server/env
+env/
+animal_server/model_weights.pth
+main
