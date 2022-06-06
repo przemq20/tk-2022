@@ -9,7 +9,7 @@ import enum
 class _OptionsSchema(Schema):
     """Class specifies module options"""
     name = fields.String(required=False)
-    styleType = fields.String(required=True)
+    _selectedTypes = fields.String(required=True)
 
 
 class _Schema(Schema):
@@ -35,10 +35,10 @@ class StyleModule(Resource):
         if self._sub_key is None:
             raise ValueError('Subscription key file was not read properly.')
 
-    def detect_styles(self, style:Type, paths):
+    def detect_styles(self, styles, paths):
         filtered_paths = []
         for file in paths:
-            if self.detect_style(file) == style:
+            if self.detect_style(file) in styles:
                 filtered_paths.append(file)
 
         return filtered_paths
@@ -97,10 +97,12 @@ class StyleModule(Resource):
 
         # load data
         paths = json_data.get("paths")
-        style_type = json_data.get("options").get("styleType")
+        styles_type = json_data.get("options").get("styleType")
+        for style in styles_type:
+            style = Type(style)
 
         style = StyleModule()
-        filter_paths = style.detect_styles(Type(style_type), paths)
+        filter_paths = style.detect_styles(styles_type, paths)
 
         # filter pictures with filter_array
         return make_response({"pictures": filter_paths, }, 200)

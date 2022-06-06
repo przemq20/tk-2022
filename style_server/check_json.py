@@ -16,7 +16,7 @@ def check_json(json_data):
     if not json_data.get("options"):
         error = "No options specified"
 
-    if not json_data.get("options").get("styleType"):
+    if not json_data.get("options").get("_selectedTypes"):
         error = "No style type specified"
 
     return error
