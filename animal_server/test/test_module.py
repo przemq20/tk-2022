@@ -41,7 +41,7 @@ class TestAnimalRest:
 
     def test_get_animal_api(self, client):
         body = {"paths": self.paths, "options": {
-            "animal": self.animal}}
+            "animalSpecies": self.animal}}
         response = client.post("/", json=body)
         print("Response", response.json)
         assert response.status_code == 200

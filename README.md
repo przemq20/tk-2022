@@ -206,6 +206,7 @@ Build steps:
     Then:
     $ python -m pip install -r requirements.txt
 
+In order to run the style module a `.skey` file containing a subscription key for the Azure Custom Vision service should be place inside the module.
 Running the style node from the root directory:
 
     $ python -m ./style_server
@@ -240,6 +241,8 @@ Build steps:
     Then:
     $ python -m pip install -r requirements.txt
 
+In order to run the animal module a `model_weights.pth` file containing model weights should be place inside the module.
+It can be downloaded from [Google Drive](https://drive.google.com/drive/folders/1S9rfshXWraeZCb_LCE_cH0SpWYgntPxN).
 Running the animal node from the root directory:
 
     $ python -m ./animal_server
@@ -359,6 +362,16 @@ The format module is a Flask REST server that resides in the format module direc
 -   `create_app.py` - utility script for creating the Flask application,
 -   `format_module.py` - the main class responsible for the handling of the requests and running the model,
 -   `__main__.py` - the main script for the format module.
+
+### Animal Module
+
+The animal module is a Flask REST server that resides in the animal module directory. It contains the following:
+
+-   `/test` - directory, where test-related utils are defined,
+-   `check_json.py` - utility script for checking the validity of the JSON request,
+-   `create_app.py` - utility script for creating the Flask application,
+-   `animal_module.py` - the main class responsible for the handling of the requests and running the model,
+-   `__main__.py` - the main script for the animal module.
 
 ### People Module
 

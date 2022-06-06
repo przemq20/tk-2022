@@ -16,7 +16,7 @@ def check_json(json_data):
     if not json_data.get("options"):
         error = "No options specified"
 
-    if not json_data.get("options").get("animal"):
+    if not json_data.get("options").get("animalSpecies"):
         error = "No animal specified"
 
     return error
