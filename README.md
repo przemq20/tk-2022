@@ -221,9 +221,9 @@ Testing the style node from the root directory:
     $ python -m pytest
 
 
-### Format node (Flask):
+### Animal node (Flask):
 
-    $ cd format_server
+    $ cd animal_server
 
 Build steps:
 
@@ -240,6 +240,25 @@ Build steps:
     Then:
     $ python -m pip install -r requirements.txt
 
+Running the animal node from the root directory:
+
+    $ python -m ./animal_server
+
+    or from the animal_server directory:
+
+    $ python ./
+
+Testing the animal node from the root directory:
+
+    $ cd .\animal_server\
+
+    $ python -m pytest
+
+
+### Format node (Flask):
+
+    $ cd format_server
+    
 Running the format node from the root directory:
 
     $ python -m ./format_server
@@ -253,6 +272,7 @@ Testing the format node from the root directory:
     $ cd .\format_server\
 
     $ python -m pytest
+
 
 ### People node (C++):
 
