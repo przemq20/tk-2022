@@ -187,6 +187,40 @@ Testing the body node from the root directory:
     $ python -m pytest
 
 
+### Style node (Flask):
+
+    $ cd style_server
+
+Build steps:
+
+    $ python -m venv ./env
+
+    For Windows:
+
+    $ ./env/Scripts/Activate.ps1 (or .bat)
+
+    or for Linux/Mac:
+
+    $ ./env/Scripts/activate
+
+    Then:
+    $ python -m pip install -r requirements.txt
+
+Running the style node from the root directory:
+
+    $ python -m ./style_server
+
+    or from the style_server directory:
+
+    $ python ./
+
+Testing the style node from the root directory:
+
+    $ cd .\style_server\
+
+    $ python -m pytest
+
+
 ### Animal node (Flask):
 
     $ cd animal_server
