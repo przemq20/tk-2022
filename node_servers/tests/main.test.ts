@@ -15,6 +15,10 @@ const testCases = [
 			pictures: [
 				`${rootPath}/resources/exampleImages/bike.jpg`,
 				`${rootPath}/resources/exampleImages/bus.jpg`,
+				`${rootPath}/resources/exampleImages/corgi1.jpeg`,
+				`${rootPath}/resources/exampleImages/corgi2.jpeg`,
+				`${rootPath}/resources/exampleImages/corgi3.jpg`,
+				`${rootPath}/resources/exampleImages/corgi4.jpg`,
 				`${rootPath}/resources/exampleImages/feather.jpg`,
 				`${rootPath}/resources/exampleImages/fish.jpg`,
 				`${rootPath}/resources/exampleImages/flower1.jpg`,

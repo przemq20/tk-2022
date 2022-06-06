@@ -386,7 +386,6 @@ class ThingsModuleConfig extends AbstractModuleConfig {
         const { name, imagePath, pathValid } = this;
         const obj = {
             name,
-            pathValid,
             ...(pathValid && {
                 imagePath,
             }),
