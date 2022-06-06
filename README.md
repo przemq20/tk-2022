@@ -255,6 +255,25 @@ Testing the animal node from the root directory:
     $ python -m pytest
 
 
+### Format node (Flask):
+
+    $ cd format_server
+    
+Running the format node from the root directory:
+
+    $ python -m ./format_server
+
+    or from the format_server directory:
+
+    $ python ./
+
+Testing the format node from the root directory:
+
+    $ cd .\format_server\
+
+    $ python -m pytest
+
+
 ### People node (C++):
 
     $ cd people_server
@@ -311,22 +330,35 @@ Inside the lib directory, you can find the text_server module which contains the
 -   `text_server_router.ex` - defines the REST API interface,
 -   `ocr.ex` - this is where the text recognition logic resides.
 
-### Weather Module
+### Body Module
 
-The weather module is a Flask REST server that resides in the weather module directory. It contains the following:
+The body module is a Flask REST server that resides in the body module directory. It contains the following:
 
--   `/predict_weather_in_image` - directory, where the integrated model is defined,
 -   `/test` - directory, where test-related utils are defined,
 -   `check_json.py` - utility script for checking the validity of the JSON request,
 -   `create_app.py` - utility script for creating the Flask application,
--   `weather_module.py` - the main class responsible for the handling of the requests and running the model,
--   `__main__.py` - the main script for the weather module.
+-   `body_module.py` - the main class responsible for the handling of the requests and running the model,
+-   `__main__.py` - the main script for the body module.
 
-Inside the `predict_weather_in_image` directory, you can find the following files:
+### Style Module
 
--   `pwii.py` - the main model handler script,
--   `retrained_graph.pb` - the model graph,
--   `retrained_labels.txt` - the model labels,
+The style module is a Flask REST server that resides in the style module directory. It contains the following:
+
+-   `/test` - directory, where test-related utils are defined,
+-   `check_json.py` - utility script for checking the validity of the JSON request,
+-   `create_app.py` - utility script for creating the Flask application,
+-   `style_module.py` - the main class responsible for the handling of the requests and running the model,
+-   `__main__.py` - the main script for the style module.
+
+### Format Module
+
+The format module is a Flask REST server that resides in the format module directory. It contains the following:
+
+-   `/test` - directory, where test-related utils are defined,
+-   `check_json.py` - utility script for checking the validity of the JSON request,
+-   `create_app.py` - utility script for creating the Flask application,
+-   `format_module.py` - the main class responsible for the handling of the requests and running the model,
+-   `__main__.py` - the main script for the format module.
 
 ### People Module
 
