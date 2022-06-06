@@ -38,7 +38,7 @@ class StyleModule(Resource):
     def detect_styles(self, styles:list, paths):
         filtered_paths = []
         for file in paths:
-            detected_style = self.detect_style(file).name
+            detected_style = self.detect_style(file).value
             if detected_style in styles:
                 filtered_paths.append(file)
 
