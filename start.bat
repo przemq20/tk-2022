@@ -6,3 +6,4 @@ start "server-weather" cmd.exe /k "weather_server/env/Scripts/Activate.bat && py
 start "server-body" cmd.exe /k "body_server/env/Scripts/Activate.bat && python3 -m ./body_server"
 start "server-style" cmd.exe /k "style_server/env/Scripts/Activate.bat && python3 -m ./style_server"
 start "server-people" cmd.exe /k "cd ./people_server/build/bin && ./peopleServer.exe"
+start "server-format" cmd.exe /k "format_server/env/Scripts/Activate.bat && python3 -m ./format_server"
