@@ -261,7 +261,22 @@ Testing the animal node from the root directory:
 ### Format node (Flask):
 
     $ cd format_server
-    
+
+Build steps:
+
+    $ python -m venv ./env
+
+    For Windows:
+
+    $ ./env/Scripts/Activate.ps1 (or .bat)
+
+    or for Linux/Mac:
+
+    $ ./env/Scripts/activate
+
+    Then:
+    $ python -m pip install -r requirements.txt
+
 Running the format node from the root directory:
 
     $ python -m ./format_server
@@ -273,6 +288,40 @@ Running the format node from the root directory:
 Testing the format node from the root directory:
 
     $ cd .\format_server\
+
+    $ python -m pytest
+
+
+### Things node (Flask):
+
+    $ cd things_server
+
+Build steps:
+
+    $ python -m venv ./env
+
+    For Windows:
+
+    $ ./env/Scripts/Activate.ps1 (or .bat)
+
+    or for Linux/Mac:
+
+    $ ./env/Scripts/activate
+
+    Then:
+    $ python -m pip install -r requirements.txt
+
+Running the things node from the root directory:
+
+    $ python -m ./things_server
+
+    or from the things_server directory:
+
+    $ python ./
+
+Testing the things node from the root directory:
+
+    $ cd .\things_server\
 
     $ python -m pytest
 
@@ -372,6 +421,16 @@ The animal module is a Flask REST server that resides in the animal module direc
 -   `create_app.py` - utility script for creating the Flask application,
 -   `animal_module.py` - the main class responsible for the handling of the requests and running the model,
 -   `__main__.py` - the main script for the animal module.
+
+### Things Module
+
+The things module is a Flask REST server that resides in the things module directory. It contains the following:
+
+-   `/test` - directory, where test-related utils are defined,
+-   `check_json.py` - utility script for checking the validity of the JSON request,
+-   `create_app.py` - utility script for creating the Flask application,
+-   `things_module.py` - the main class responsible for the handling of the requests and running the model,
+-   `__main__.py` - the main script for the things module.
 
 ### People Module
 

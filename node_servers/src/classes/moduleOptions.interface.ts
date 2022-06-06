@@ -13,4 +13,5 @@ export const ModuleRoutes = {
 	style: 'http://localhost:8091/',
 	animal: 'http://localhost:8092/',
 	format: 'http://localhost:8094/',
+	things: 'http://localhost:8099/',
 };
