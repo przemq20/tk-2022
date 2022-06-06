@@ -14,8 +14,6 @@ class TestStyleRest:
         os.path.join(ROOT_PATH, "resources/Styles/photo.jpg")
     ]
 
-    style_type = [Type.photo]
-
     @pytest.fixture()
     def app(self):
         app = create_app()
@@ -26,24 +24,25 @@ class TestStyleRest:
     def client(self, app):
         return app.test_client()
 
-    def test_detect_photo(self):
-        self.style_type = [Type.photo]
-        result = StyleModule().detect_style(self.paths[2])
-        assert result == self.style_type(0)
-
     def test_detect_linedrawing(self):
         self.style_type = [Type.line]
         result = StyleModule().detect_style(self.paths[0])
-        assert result == self.style_type(0)
+        assert result == self.style_type[0]
 
     def test_detect_clipart(self):
         self.style_type = [Type.clipart]
         result = StyleModule().detect_style(self.paths[1])
-        assert result == self.style_type(0)
+        assert result == self.style_type[0]
+
+    def test_detect_photo(self):
+        self.style_type = [Type.photo]
+        result = StyleModule().detect_style(self.paths[2])
+        assert result == self.style_type[0]
 
     def test_get_style_api(self, client):
+        self.style_type = [Type.photo]
         body = {"paths": self.paths, "options": {
-            "_selectedTypes": self.styles_type(0)}}
+            "_selectedTypes": [self.style_type[0].name]}}
         response = client.post("/", json=body)
         print("Response", response.json)
         assert response.status_code == 200
