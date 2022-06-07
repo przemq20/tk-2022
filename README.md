@@ -207,6 +207,7 @@ Build steps:
     $ python -m pip install -r requirements.txt
 
 In order to run the style module a `.skey` file containing a subscription key for the Azure Custom Vision service should be place inside the module.
+The infrastructure definition for the service is availiable inside the `iac` directory.
 Running the style node from the root directory:
 
     $ python -m ./style_server
