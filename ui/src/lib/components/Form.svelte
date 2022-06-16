@@ -14,8 +14,9 @@
         isAnimalConfig,
         isBodyConfig,
         isStyleConfig,
-        isThingsConfig
+        isThingsConfig, isDogsConfig
     } from '../utils/moduleFormConfig';
+    import {dogsSpecies} from "../utils/dogsSpecies";
 
     export let searching = false;
 
@@ -484,6 +485,30 @@
                 {#if !(formConfigMap['things'].imagePath.length === 0 || formConfigMap['things'].pathValid)}
                     <p class="errorMessage">This is not a valid path</p>
                 {/if}
+            </div>
+        {/if}
+    </div>
+
+    <!-- Dogs SECTION -->
+    <div class="inputContainer">
+        <p class="inputContainerTitle" on:click={handleClick('dogs')}>
+            <input
+                    type="checkbox"
+                    bind:checked={formConfigMap['dogs']._active}
+                    on:click|stopPropagation
+            />
+            Dogs <i class="arrow {moduleUis['dogs'].arrowDirection}"/>
+        </p>
+        {#if moduleUis['dogs'].visible && isDogsConfig(formConfigMap['dogs'])}
+            <div class="moduleForm two2one" transition:slide>
+                <label>
+                    Dogs
+                    <select bind:value={formConfigMap['dogs']._dogsSpecies}>
+                        {#each dogsSpecies as {value, name}}
+                            <option {value}>{name}</option>
+                        {/each}
+                    </select>
+                </label>
             </div>
         {/if}
     </div>
