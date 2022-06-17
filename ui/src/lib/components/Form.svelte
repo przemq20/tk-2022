@@ -6,19 +6,22 @@
     import {weatherOptions} from '../utils/weatherOptions';
     import formConfigMap, {
         FormRange,
+        isAnimalConfig,
+        isBodyConfig,
+        isDogsConfig,
         isFormatConfig,
         isMetadataConfig,
         isPeopleConfig,
-        isTextConfig,
-        isWeatherConfig,
-        isAnimalConfig,
-        isBodyConfig,
+        isSimilaritiesConfig,
+        isSizeConfig,
         isStyleConfig,
+        isTextConfig,
         isThingsConfig,
-        isDogsConfig,
-        isSimilaritiesConfig
+        isWeatherConfig
     } from '../utils/moduleFormConfig';
     import {dogsSpecies} from "../utils/dogsSpecies";
+    import {unitType} from "../utils/unitType";
+    import {comparatorType} from "../utils/comparatorType";
 
     export let searching = false;
 
@@ -491,13 +494,13 @@
         {/if}
     </div>
 
-        <!-- ANIMAL SECTION -->
+    <!-- ANIMAL SECTION -->
     <div class="inputContainer">
         <p class="inputContainerTitle" on:click={handleClick('similarities')}>
             <input
-                type="checkbox"
-                bind:checked={formConfigMap['similarities']._active}
-                on:click|stopPropagation
+                    type="checkbox"
+                    bind:checked={formConfigMap['similarities']._active}
+                    on:click|stopPropagation
             />
             Similarities <i class="arrow {moduleUis['similarities'].arrowDirection}"/>
         </p>
@@ -506,20 +509,20 @@
                 <label>
                     Path
                     <input
-                    type="text"
-                    name="imagePath"
-                    bind:value={formConfigMap['similarities'].imagePath}
+                            type="text"
+                            name="imagePath"
+                            bind:value={formConfigMap['similarities'].imagePath}
                     >
                 </label>
                 <label>
                     Minimal confidence
                     <input
-                        type="number"
-                        name="confidence"
-                        bind:value={formConfigMap['similarities'].confidence}
-                        min="1"
-                        max="100"
-                        step="1"/>
+                            type="number"
+                            name="confidence"
+                            bind:value={formConfigMap['similarities'].confidence}
+                            min="1"
+                            max="100"
+                            step="1"/>
                 </label>
             </div>
         {/if}
@@ -548,6 +551,85 @@
             </div>
         {/if}
     </div>
+
+    <!-- METADATA SECTION -->
+    <div class="inputContainer">
+        <p class="inputContainerTitle" on:click={handleClick('size')}>
+            <input
+                    type="checkbox"
+                    bind:checked={formConfigMap['size']._active}
+                    on:click|stopPropagation
+            />
+            Size <i class="arrow {moduleUis['size'].arrowDirection}"/>
+        </p>
+        {#if moduleUis['size'].visible && isSizeConfig(formConfigMap['size'])}
+            <div class="moduleForm" transition:slide>
+                <label class="span2col select"
+                >Unit
+                    <select bind:value={formConfigMap['size']._unit}>
+                        {#each unitType as {value, name}}
+                            <option {value}>{name}</option>
+                        {/each}
+                    </select>
+                </label>
+                {#if formConfigMap['size']._unit === 'pixels'}
+                    <label
+                    >Pixels
+                        <input
+                                type="number"
+                                bind:value={formConfigMap['size']._pixels[0]}
+                        />
+                        <input
+                                type="number"
+                                bind:value={formConfigMap['size']._pixels[1]}
+                        />
+                    </label>
+                {/if}
+                {#if formConfigMap['size']._unit === 'kb'}
+                    <label
+                    >Kb
+                        <input
+                                type="number"
+                                bind:value={formConfigMap['size']._kb}
+                        />
+                    </label>
+                {/if}
+                {#if formConfigMap['size']._unit === 'cm'}
+
+                    <label
+                    >Cm
+                        <input
+                                type="number"
+                                bind:value={formConfigMap['size']._cm[0]}
+                        />
+                        <input
+                                type="number"
+                                bind:value={formConfigMap['size']._cm[1]}
+                        />
+                    </label>
+                {/if}
+                <label class="span2col select"
+                >Comparator
+                    <select bind:value={formConfigMap['size']._comparator}>
+                        {#each comparatorType as {value, name}}
+                            <option {value}>{name}</option>
+                        {/each}
+                    </select>
+                </label>
+                {#if formConfigMap['size']._comparator === '=='}
+                    <label
+                    >threshold
+                        <input
+                                type="number"
+                                bind:value={formConfigMap['size']._threshold}
+                        />
+                    </label>
+                {/if}
+
+            </div>
+        {/if}
+    </div>
+
 
     <!-- SUBMIT SECTION -->
     <div class="submitContainer">
