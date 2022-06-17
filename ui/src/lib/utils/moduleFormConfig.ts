@@ -1,6 +1,7 @@
 import type { FlashType } from './flashOptions';
 import type { WeatherType } from './weatherOptions';
 import type {AnimalSpecies} from "./animalSpecies";
+import type {DogsSpecies} from "./dogsSpecies";
 
 function notEmptyString(value: string): string {
     if (value.length === 0) return undefined;
@@ -439,6 +440,28 @@ export function isSimilaritiesConfig(config: AbstractModuleConfig): config is Si
     return config.name === 'similarities';
 }
 
+class DogsModuleConfig extends AbstractModuleConfig {
+    _dogSpecies: DogsSpecies;
+    get dogsSpecies() {
+        return notEmptyString(this._dogSpecies);
+    }
+
+    get allConfig() {
+        const { name, dogsSpecies } = this;
+        const obj = { name, dogsSpecies: dogsSpecies };
+        Object.keys(obj).forEach((key) => obj[key] === undefined && delete obj[key]);
+        return obj;
+    }
+    constructor() {
+        super('dogs');
+        this._dogSpecies = 'corgi';
+    }
+}
+
+export function isDogsConfig(config: AbstractModuleConfig): config is DogsModuleConfig {
+    return config.name === 'dogs';
+}
+
 const array = [
     ['text', new TextModuleConfig()],
     ['metadata', new MetadataModuleConfig()],
@@ -449,6 +472,7 @@ const array = [
     ['body', new BodyModuleConfig()],
     ['animal', new AnimalModuleConfig()],
     ['things', new ThingsModuleConfig()],
+    ['dogs', new DogsModuleConfig()],
     ['similarities', new SimilaritiesModuleConfig()],
     /*
     ['another module', new AnotherModuleConfig()],
