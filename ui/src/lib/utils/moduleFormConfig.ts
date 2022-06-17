@@ -404,6 +404,41 @@ export function isThingsConfig(config: AbstractModuleConfig): config is ThingsMo
     return config.name === 'things';
 }
 
+class SimilaritiesModuleConfig extends AbstractModuleConfig {
+    imagePath: string;
+    pathValid: boolean;
+    confidence: number
+
+    checkIfValid = (e: Event) => {
+        const re =
+            /^(\/.*|[a-zA-Z]:[\\/](?:([^<>:"\/\\|?*]*[^<>:"\/\\|?*.][\\/]|..[\\/])*([^<>:"\/\\|?*]*[^<>:"\/\\|?*.][\\/]?|..[\\/]))?)$/;
+        this.pathValid = re.test((e.target as HTMLInputElement).value);
+    }
+
+    get allConfig() {
+        const { name, confidence, imagePath, pathValid } = this;
+        const obj = {
+            name,
+            ...(pathValid && {
+                imagePath,
+                confidence
+            }),
+        };
+        Object.keys(obj).forEach((key) => obj[key] === undefined && delete obj[key]);
+        return obj;
+    }
+    constructor() {
+        super('similarities');
+        this.imagePath = '';
+        this.pathValid = true;
+        this.confidence = 50;
+    }
+}
+
+export function isSimilaritiesConfig(config: AbstractModuleConfig): config is SimilaritiesModuleConfig {
+    return config.name === 'similarities';
+}
+
 const array = [
     ['text', new TextModuleConfig()],
     ['metadata', new MetadataModuleConfig()],
@@ -414,6 +449,7 @@ const array = [
     ['body', new BodyModuleConfig()],
     ['animal', new AnimalModuleConfig()],
     ['things', new ThingsModuleConfig()],
+    ['similarities', new SimilaritiesModuleConfig()],
     /*
     ['another module', new AnotherModuleConfig()],
     */
