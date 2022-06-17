@@ -9,6 +9,7 @@
         isAnimalConfig,
         isBodyConfig,
         isDogsConfig,
+        isFacesConfig,
         isFormatConfig,
         isMetadataConfig,
         isPeopleConfig,
@@ -22,6 +23,7 @@
     import {dogsSpecies} from "../utils/dogsSpecies";
     import {unitType} from "../utils/unitType";
     import {comparatorType} from "../utils/comparatorType";
+    import {facesTypes} from "../utils/FacesTypes";
 
     export let searching = false;
 
@@ -552,7 +554,7 @@
         {/if}
     </div>
 
-    <!-- METADATA SECTION -->
+    <!-- SIZE SECTION -->
     <div class="inputContainer">
         <p class="inputContainerTitle" on:click={handleClick('size')}>
             <input
@@ -622,6 +624,68 @@
                         <input
                                 type="number"
                                 bind:value={formConfigMap['size']._threshold}
+                        />
+                    </label>
+                {/if}
+
+            </div>
+        {/if}
+    </div>
+
+    <!-- METADATA SECTION -->
+    <div class="inputContainer">
+        <p class="inputContainerTitle" on:click={handleClick('faces')}>
+            <input
+                    type="checkbox"
+                    bind:checked={formConfigMap['faces']._active}
+                    on:click|stopPropagation
+            />
+            Faces <i class="arrow {moduleUis['faces'].arrowDirection}"/>
+        </p>
+        {#if moduleUis['faces'].visible && isFacesConfig(formConfigMap['faces'])}
+            <div class="moduleForm" transition:slide>
+                <label class="span2col select"
+                >Type
+                    <select bind:value={formConfigMap['faces']._type}>
+                        {#each facesTypes as {value, name}}
+                            <option {value}>{name}</option>
+                        {/each}
+                    </select>
+                </label>
+                {#if formConfigMap['faces']._type === 'faces' || formConfigMap['faces']._type === 'faces&smiles'}
+                    <label
+                    >Number of Faces
+                        <input
+                                type="number"
+                                bind:value={formConfigMap['faces']._noFaces}
+                        />
+                    </label>
+                {/if}
+
+                {#if formConfigMap['faces']._type === 'smiles' || formConfigMap['faces']._type === 'faces&smiles'}
+
+                    <label
+                    >Number of Smiles
+                        <input
+                                type="number"
+                                bind:value={formConfigMap['faces']._noSmiles}
+                        />
+                    </label>
+                {/if}
+                <label class="span2col select"
+                >Comparator
+                    <select bind:value={formConfigMap['faces']._comparator}>
+                        {#each comparatorType as {value, name}}
+                            <option {value}>{name}</option>
+                        {/each}
+                    </select>
+                </label>
+                {#if formConfigMap['faces']._comparator === '=='}
+                    <label
+                    >threshold
+                        <input
+                                type="number"
+                                bind:value={formConfigMap['faces']._threshold}
                         />
                     </label>
                 {/if}

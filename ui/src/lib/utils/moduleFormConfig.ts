@@ -3,6 +3,8 @@ import type {WeatherType} from './weatherOptions';
 import type {AnimalSpecies} from "./animalSpecies";
 import type {DogsSpecies} from "./dogsSpecies";
 import type {UnitType} from "./unitType";
+import type {FacesTypes} from "./FacesTypes";
+import {facesTypes} from "./FacesTypes";
 
 function notEmptyString(value: string): string {
     if (value.length === 0) return undefined;
@@ -573,6 +575,70 @@ export function isSizeConfig(config: AbstractModuleConfig): config is SizeModule
     return config.name === 'size';
 }
 
+class FacesModuleConfig extends AbstractModuleConfig {
+    _type: FacesTypes;
+
+    get type() {
+        return this._type;
+    }
+
+    _noFaces: number;
+    get noFaces() {
+        return this._noFaces;
+    }
+
+    _noSmiles: number;
+    get noSmiles() {
+        return this._noSmiles;
+    }
+
+    _comparator: string;
+    get comparator() {
+        return notEmptyString(this._comparator);
+    }
+
+    _threshold: number;
+    get threshold() {
+        return notNullNumber(this._threshold);
+    }
+
+    get allConfig() {
+        const {
+            name,
+            type,
+            noFaces,
+            noSmiles,
+            comparator,
+            threshold,
+
+        } = this;
+        const obj = {
+            name,
+            type,
+            noFaces,
+            noSmiles,
+            comparator,
+            threshold,
+        };
+        Object.keys(obj).forEach((key) => obj[key] === undefined && delete obj[key]);
+        return obj;
+    }
+
+    constructor() {
+        super('faces');
+        this._type = "faces";
+        this._noFaces = null;
+        this._noSmiles = null;
+        this._comparator = null;
+        this._threshold = null;
+    }
+}
+
+export function isFacesConfig(config: AbstractModuleConfig): config is FacesModuleConfig {
+    return config.name === 'faces';
+}
+
+
 const array = [
     ['text', new TextModuleConfig()],
     ['metadata', new MetadataModuleConfig()],
@@ -586,6 +652,7 @@ const array = [
     ['dogs', new DogsModuleConfig()],
     ['similarities', new SimilaritiesModuleConfig()],
     ['size', new SizeModuleConfig()],
+    ['faces', new FacesModuleConfig()],
     /*
     ['another module', new AnotherModuleConfig()],
     */

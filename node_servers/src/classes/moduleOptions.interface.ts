@@ -17,4 +17,5 @@ export const ModuleRoutes = {
 	similarities: 'http://localhost:8100/',
 	dogs: 'http://localhost:8101/',
 	size: 'http://localhost:8102/',
+	faces: 'http://localhost:8103/',
 };
