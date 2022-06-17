@@ -14,7 +14,9 @@
         isAnimalConfig,
         isBodyConfig,
         isStyleConfig,
-        isThingsConfig, isDogsConfig
+        isThingsConfig,
+        isDogsConfig,
+        isSimilaritiesConfig
     } from '../utils/moduleFormConfig';
     import {dogsSpecies} from "../utils/dogsSpecies";
 
@@ -485,6 +487,40 @@
                 {#if !(formConfigMap['things'].imagePath.length === 0 || formConfigMap['things'].pathValid)}
                     <p class="errorMessage">This is not a valid path</p>
                 {/if}
+            </div>
+        {/if}
+    </div>
+
+        <!-- ANIMAL SECTION -->
+    <div class="inputContainer">
+        <p class="inputContainerTitle" on:click={handleClick('similarities')}>
+            <input
+                type="checkbox"
+                bind:checked={formConfigMap['similarities']._active}
+                on:click|stopPropagation
+            />
+            Similarities <i class="arrow {moduleUis['similarities'].arrowDirection}"/>
+        </p>
+        {#if moduleUis['similarities'].visible && isSimilaritiesConfig(formConfigMap['similarities'])}
+            <div class="moduleForm two2one" transition:slide>
+                <label>
+                    Path
+                    <input
+                    type="text"
+                    name="imagePath"
+                    bind:value={formConfigMap['similarities'].imagePath}
+                    >
+                </label>
+                <label>
+                    Minimal confidence
+                    <input
+                        type="number"
+                        name="confidence"
+                        bind:value={formConfigMap['similarities'].confidence}
+                        min="1"
+                        max="100"
+                        step="1"/>
+                </label>
             </div>
         {/if}
     </div>
