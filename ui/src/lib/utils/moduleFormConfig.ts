@@ -5,7 +5,6 @@ import type {DogsSpecies} from "./dogsSpecies";
 import type {Color} from "./color"
 import type {UnitType} from "./unitType";
 import type {FacesTypes} from "./FacesTypes";
-import {facesTypes} from "./FacesTypes";
 
 function notEmptyString(value: string): string {
     if (value.length === 0) return undefined;
@@ -645,7 +644,7 @@ export function isFacesConfig(config: AbstractModuleConfig): config is FacesModu
 
 
 class ColorsModuleConfig extends AbstractModuleConfig {
-    _color: Color
+    _color: string
     _metric: number
     _comparator: string
     _threshold: number
@@ -653,7 +652,7 @@ class ColorsModuleConfig extends AbstractModuleConfig {
     _tolerance: number
 
     get color(){
-        return notEmptyColor(this._color)
+        return notEmptyString(this._color)
     }
     get metric(){
         const v = notNullNumber(this._metric)
@@ -686,7 +685,7 @@ class ColorsModuleConfig extends AbstractModuleConfig {
     }
     constructor(){
         super('colors')
-        this._color = [0,0,0] as Color
+        this._color = "#ff0000"
         this._metric = 3
         this._comparator = '=='
         this._threshold = 10

@@ -1,17 +1,18 @@
-import os
-
-from marshmallow import Schema, fields
-from flask_restful import Resource
-from flask import make_response, request
-from check_json import check_json
-from typing import Callable, Union
-from PIL import ImageStat, Image
 from enum import Enum
+from typing import Callable, Union
+
+from PIL import ImageStat, Image, ImageColor
+from flask import make_response, request
+from flask_restful import Resource
+from marshmallow import Schema, fields
+
+from check_json import check_json
 
 Comparable = Union[float, int]
 
 STAT_METRICS = {'max', 'min', 'mean', 'median', 'rms'}
 PIXEL_METRICS = {'percentage'}
+
 
 def eight_bit_to_rgb(pixel):
     r = (pixel >> 5) * 255 / 7
@@ -26,12 +27,14 @@ def color_percentage(data_record, expected, tolerance):
     else:
         return lambda pixel: all([abs(x - y) < tolerance for x, y in zip(expected, eight_bit_to_rgb(pixel))])
 
+
 def get_comparator(comparator: str, threshold=0) -> Callable[[Comparable, Comparable], bool]:
     return {"==": lambda checked, reference: abs(checked - reference) < threshold,
             ">": lambda checked, reference: checked > reference,
             ">=": lambda checked, reference: checked >= reference,
             "<": lambda checked, reference: checked < reference,
             "<=": lambda checked, reference: checked <= reference}[comparator]
+
 
 class ColorMetric(Enum):
     max = 1
@@ -40,6 +43,7 @@ class ColorMetric(Enum):
     median = 4
     rms = 5
     percentage = 6
+
 
 def get_stat_based_metric(metric: ColorMetric):
     return {
@@ -56,11 +60,16 @@ def get_pixel_based_metric(metric: ColorMetric):
         "percentage": color_percentage
     }[metric.name]
 
+
 class _OptionsSchema(Schema):
     """Class specifies module options"""
-    threshold = fields.Float(required = False)
-    percent_threshold = fields.Float(required = False)
-    tolerance = fields.Float(required = False)
+    threshold = fields.Float(required=False)
+    percent_threshold = fields.Float(required=False)
+    tolerance = fields.Float(required=False)
+    color = fields.String()
+    metric = fields.Number(required=False)
+    name = fields.String(required=False)
+    comparator = fields.String(required=False)
 
 
 class _Schema(Schema):
@@ -72,6 +81,7 @@ class _Schema(Schema):
 
     options = fields.Nested(_OptionsSchema)
 
+
 class ColorsModule(Resource):
     def __init__(self) -> None:
         super().__init__()
@@ -80,7 +90,7 @@ class ColorsModule(Resource):
     def get_filter_func(color, metric, comparator, threshold, percent_threshold, tolerance):
         comparator = get_comparator(comparator, threshold)
 
-        if metric.name in STAT_METRICS:
+        if metric in STAT_METRICS:
             metric = get_stat_based_metric(metric)
 
             def is_compliant(path):
@@ -96,7 +106,7 @@ class ColorsModule(Resource):
                     return comparator(calc_metric[0], colors)
                 else:  # This is not a normal image. I refuse to return it.
                     return False
-        elif metric.name in PIXEL_METRICS:
+        elif metric in PIXEL_METRICS:
             metric = get_pixel_based_metric(metric)
 
             def is_compliant(path):
@@ -138,13 +148,13 @@ class ColorsModule(Resource):
         if response_err:
             print("Response error: ", response_err)
             return make_response(response_err, 400)
-        
+
         print(json_data)
         paths = json_data.get("paths")
 
-        color = json_data.get("color")
-        metric = json_data.get("metric")
-        comparator = json_data.get("comparator")
+        color = ImageColor.getcolor(json_data.get("options").get("color"), "RGB")
+        metric = json_data.get("options").get("metric")
+        comparator = json_data.get("options").get("comparator")
         threshold = json_data.get("options").get("threshold")
         percent_threshold = json_data.get("options").get("percent_threshold")
         tolerance = json_data.get("options").get("tolerance")

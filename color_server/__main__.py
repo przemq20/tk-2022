@@ -2,7 +2,7 @@ from create_app import create_app
 
 
 def main():
-    create_app().run(host='localhost', port=8099)
+    create_app().run(host='localhost', port=8104)
 
 
 if __name__ == '__main__':

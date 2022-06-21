@@ -10,6 +10,7 @@
         FormRange,
         isAnimalConfig,
         isBodyConfig,
+        isColorsConfig,
         isDogsConfig,
         isFacesConfig,
         isFormatConfig,
@@ -20,14 +21,10 @@
         isStyleConfig,
         isTextConfig,
         isThingsConfig,
-        isDogsConfig,
-        isSimilaritiesConfig,
-        isColorsConfig
         isWeatherConfig
     } from '../utils/moduleFormConfig';
     import {dogsSpecies} from "../utils/dogsSpecies";
     import {unitType} from "../utils/unitType";
-    import {comparatorType} from "../utils/comparatorType";
     import {facesTypes} from "../utils/FacesTypes";
 
     export let searching = false;
@@ -578,7 +575,7 @@
                 </label>
                 <!-- metric -->
                 <label>
-                Metric
+                    Metric
                     <select bind:value={formConfigMap['colors']._metric}>
                         {#each colorMetrics as {value, name}}
                             <option {value}>{name}</option>
@@ -587,7 +584,7 @@
                 </label>
                 <!-- comparator -->
                 <label class="span2col select">
-                Comparator
+                    Comparator
                     <select bind:value={formConfigMap['colors']._comparator}>
                         {#each comparatorType as {value, name}}
                             <option {value}>{name}</option>
@@ -598,32 +595,32 @@
                 <label>
                     Threshold
                     <input
-                        type="number"
-                        name="threshold"
-                        bind:value={formConfigMap['colors']._threshold}
-                        step="1"/>
+                            type="number"
+                            name="threshold"
+                            bind:value={formConfigMap['colors']._threshold}
+                            step="1"/>
                 </label>
                 <!-- percent_threshold -->
                 <label>
                     Percent Threshold
                     <input
-                        type="number"
-                        name="percent_threshold"
-                        bind:value={formConfigMap['colors']._percent_threshold}
-                        min="1"
-                        max="100"
-                        step="1"/>
+                            type="number"
+                            name="percent_threshold"
+                            bind:value={formConfigMap['colors']._percent_threshold}
+                            min="1"
+                            max="100"
+                            step="1"/>
                 </label>
                 <!-- tolerance -->
                 <label>
                     Tolerance
                     <input
-                        type="number"
-                        name="tolerance"
-                        bind:value={formConfigMap['colors']._tolerance}
-                        min="0"
-                        max="255"
-                        step="1"/>
+                            type="number"
+                            name="tolerance"
+                            bind:value={formConfigMap['colors']._tolerance}
+                            min="0"
+                            max="255"
+                            step="1"/>
                 </label>
 
             </div>
