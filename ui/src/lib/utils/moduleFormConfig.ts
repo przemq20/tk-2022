@@ -2,9 +2,9 @@ import type {FlashType} from './flashOptions';
 import type {WeatherType} from './weatherOptions';
 import type {AnimalSpecies} from "./animalSpecies";
 import type {DogsSpecies} from "./dogsSpecies";
+import type {Color} from "./color"
 import type {UnitType} from "./unitType";
 import type {FacesTypes} from "./FacesTypes";
-import {facesTypes} from "./FacesTypes";
 
 function notEmptyString(value: string): string {
     if (value.length === 0) return undefined;
@@ -25,6 +25,10 @@ function notEmptyHex(value: string): number {
     const parsed = parseInt(value, 16);
     if (isNaN(parsed)) return undefined;
     return parsed;
+}
+
+function notEmptyColor(value: Color): Color{
+    return (value.map(v=>v?v:0)) as Color
 }
 
 export abstract class AbstractModuleConfig {
@@ -639,6 +643,61 @@ export function isFacesConfig(config: AbstractModuleConfig): config is FacesModu
 }
 
 
+class ColorsModuleConfig extends AbstractModuleConfig {
+    _color: string
+    _metric: number
+    _comparator: string
+    _threshold: number
+    _percent_threshold: number
+    _tolerance: number
+
+    get color(){
+        return notEmptyString(this._color)
+    }
+    get metric(){
+        const v = notNullNumber(this._metric)
+        return v?v:1
+    }
+
+    get comparator(){
+        const v = notEmptyString(this._comparator)
+        return v?v:"mean"
+    }
+
+    get threshold(){
+        return notNullNumber(this._threshold)
+    }
+
+    get percent_threshold(){
+        return notNullNumber(this._percent_threshold)
+    }
+
+    get tolerance(){
+        return notNullNumber(this._tolerance)
+    }
+
+
+    get allConfig(){
+        const {name, color, metric, comparator, threshold, percent_threshold, tolerance} = this;
+        const obj = { name, color, metric, comparator, threshold, percent_threshold, tolerance }
+        Object.keys(obj).forEach((key) => obj[key] === undefined && delete obj[key]);
+        return obj
+    }
+    constructor(){
+        super('colors')
+        this._color = "#ff0000"
+        this._metric = 3
+        this._comparator = '=='
+        this._threshold = 10
+        this._percent_threshold = 10
+        this._tolerance = 10
+    }
+}
+
+export function isColorsConfig(config: AbstractModuleConfig): config is ColorsModuleConfig {
+    return config.name === 'colors';
+}
+
 const array = [
     ['text', new TextModuleConfig()],
     ['metadata', new MetadataModuleConfig()],
@@ -653,6 +712,7 @@ const array = [
     ['similarities', new SimilaritiesModuleConfig()],
     ['size', new SizeModuleConfig()],
     ['faces', new FacesModuleConfig()],
+    ['colors', new ColorsModuleConfig()],
     /*
     ['another module', new AnotherModuleConfig()],
     */

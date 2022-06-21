@@ -18,4 +18,5 @@ export const ModuleRoutes = {
 	dogs: 'http://localhost:8101/',
 	size: 'http://localhost:8102/',
 	faces: 'http://localhost:8103/',
+	colors: 'http://localhost:8104/',
 };
