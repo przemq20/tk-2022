@@ -4,6 +4,8 @@
     import {animalSpecies} from '../utils/animalSpecies';
     import {flashOptions} from '../utils/flashOptions';
     import {weatherOptions} from '../utils/weatherOptions';
+    import {comparatorType} from '../utils/comparatorType';
+    import {colorMetrics} from '../utils/colorMetrics';
     import formConfigMap, {
         FormRange,
         isFormatConfig,
@@ -16,7 +18,8 @@
         isStyleConfig,
         isThingsConfig,
         isDogsConfig,
-        isSimilaritiesConfig
+        isSimilaritiesConfig,
+        isColorsConfig
     } from '../utils/moduleFormConfig';
     import {dogsSpecies} from "../utils/dogsSpecies";
 
@@ -545,6 +548,77 @@
                         {/each}
                     </select>
                 </label>
+            </div>
+        {/if}
+    </div>
+
+    <!-- COLORS SECTION -->
+    <div class="inputContainer">
+        <p class="inputContainerTitle" on:click={handleClick('colors')}>
+            <input
+                    type="checkbox"
+                    bind:checked={formConfigMap['colors']._active}
+                    on:click|stopPropagation
+            />
+            Colors <i class="arrow {moduleUis['colors'].arrowDirection}"/>
+        </p>
+        {#if moduleUis['colors'].visible && isColorsConfig(formConfigMap['colors'])}
+            <div class="moduleForm two2one" transition:slide>
+                <!-- color -->
+                <label>
+                    Color
+                    <input type="color" name="color_input" bind:value={formConfigMap['colors']._color}>
+                </label>
+                <!-- metric -->
+                <label>
+                Metric
+                    <select bind:value={formConfigMap['colors']._metric}>
+                        {#each colorMetrics as {value, name}}
+                            <option {value}>{name}</option>
+                        {/each}
+                    </select>
+                </label>
+                <!-- comparator -->
+                <label class="span2col select">
+                Comparator
+                    <select bind:value={formConfigMap['colors']._comparator}>
+                        {#each comparatorType as {value, name}}
+                            <option {value}>{name}</option>
+                        {/each}
+                    </select>
+                </label>
+                <!-- threshold -->
+                <label>
+                    Threshold
+                    <input
+                        type="number"
+                        name="threshold"
+                        bind:value={formConfigMap['colors']._threshold}
+                        step="1"/>
+                </label>
+                <!-- percent_threshold -->
+                <label>
+                    Percent Threshold
+                    <input
+                        type="number"
+                        name="percent_threshold"
+                        bind:value={formConfigMap['colors']._percent_threshold}
+                        min="1"
+                        max="100"
+                        step="1"/>
+                </label>
+                <!-- tolerance -->
+                <label>
+                    Tolerance
+                    <input
+                        type="number"
+                        name="tolerance"
+                        bind:value={formConfigMap['colors']._tolerance}
+                        min="0"
+                        max="255"
+                        step="1"/>
+                </label>
+                
             </div>
         {/if}
     </div>
