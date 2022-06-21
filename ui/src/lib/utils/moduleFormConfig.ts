@@ -627,8 +627,8 @@ class FacesModuleConfig extends AbstractModuleConfig {
     constructor() {
         super('faces');
         this._type = "faces";
-        this._noFaces = null;
-        this._noSmiles = null;
+        this._noFaces = 0;
+        this._noSmiles = 0;
         this._comparator = null;
         this._threshold = null;
     }
