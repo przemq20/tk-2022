@@ -70,9 +70,10 @@ class SimilaritiesModule(Resource):
         paths = json_data.get("paths")
         imagePath = json_data.get("options").get("imagePath")
         confidence = json_data.get("options").get("confidence")
+        module = SimilaritiesModule()
         if confidence:
-            filter_paths = SimilaritiesModule().check_similarity(paths, confidence, imagePath)
+            filter_paths = module.check_similarity(paths, confidence, imagePath)
         else:
-            filter_paths = SimilaritiesModule().check_similarity(paths, 0, imagePath)
+            filter_paths = module.check_similarity(paths, 0, imagePath)
 
         return make_response({"pictures": filter_paths, }, 200)
